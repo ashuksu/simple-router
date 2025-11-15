@@ -1,4 +1,4 @@
-import {NavLink, type NavLinkRenderProps, Route, Routes} from "react-router";
+import {NavLink, type NavLinkRenderProps, Route, Routes, useParams} from "react-router";
 import {clsx} from "clsx";
 
 export function App() {
@@ -16,14 +16,13 @@ export function App() {
         <>
             <nav className='flex items-center gap-3 p-3'>
                 <NavLink className={classNameLink} to={'/'}>Home</NavLink>
-                <NavLink className={classNameLink} to={'/about'}>About</NavLink>
-                <NavLink className={classNameLink} to={'/users'}>Users</NavLink>
+                <NavLink className={classNameLink} to={'/users/29'}>User 29</NavLink>
+                <NavLink className={classNameLink} to={'/users/liu'}>Use Liu</NavLink>
             </nav>
             <main className={'p-3 prose'}>
                 <Routes>
                     <Route path={'/'} element={<Home/>}/>
-                    <Route path={'/about'} element={<About/>}/>
-                    <Route path={'/users'} element={<Users/>}/>
+                    <Route path={'/users/:userId'} element={<Users/>}/>
                 </Routes>
             </main>
         </>
@@ -34,10 +33,9 @@ function Home() {
     return <h1>Home</h1>
 }
 
-function About() {
-    return <h1>About</h1>
-}
-
 function Users() {
-    return <h1>Users</h1>
+
+    const params = useParams<{ userId: string }>();
+
+    return <h1>Users {params.userId}</h1>
 }
