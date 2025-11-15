@@ -1,15 +1,23 @@
-import {Link, Route, Routes} from "react-router";
+import {NavLink, type NavLinkRenderProps, Route, Routes} from "react-router";
 import {clsx} from "clsx";
 
 export function App() {
-    const classNameLink = 'hover:text-amber-300 transition-colors';
+    const classNameLink = ({isActive}: NavLinkRenderProps) => {
+        return clsx(
+            'transition-colors font-bold',
+            {
+                'text-amber-500 cursor-default': isActive,
+                'hover:text-amber-300': !isActive
+            }
+        );
+    };
 
     return (
         <>
             <nav className='flex items-center gap-3 p-3'>
-                <Link className={clsx(classNameLink)} to={'/'}>Home</Link>
-                <Link className={clsx(classNameLink)} to={'/about'}>About</Link>
-                <Link className={clsx(classNameLink)} to={'/users'}>Users</Link>
+                <NavLink className={classNameLink} to={'/'}>Home</NavLink>
+                <NavLink className={classNameLink} to={'/about'}>About</NavLink>
+                <NavLink className={classNameLink} to={'/users'}>Users</NavLink>
             </nav>
             <main className={'p-3 prose'}>
                 <Routes>
