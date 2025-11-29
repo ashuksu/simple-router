@@ -1,7 +1,7 @@
 import {NavLink, type NavLinkRenderProps} from "react-router";
 import {clsx} from "clsx";
 
-export default function Header() {
+export function Header() {
     const classNameLink = ({isActive}: NavLinkRenderProps) => {
         return clsx(
             'transition-colors font-bold',
