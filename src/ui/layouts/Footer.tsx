@@ -1,4 +1,4 @@
-import Title from "../elements/Title";
+import {Title} from "../elements/Title";
 
 export function Footer() {
     return (

@@ -1,4 +1,4 @@
-import Title from "../elements/Title.tsx";
+import {Title} from "../elements/Title.tsx";
 
 export function HomePage() {
     return (

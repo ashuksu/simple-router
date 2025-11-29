@@ -1,4 +1,5 @@
 import {useParams} from "react-router";
+import {Title} from "../elements/Title.tsx";
 
 export function Users() {
 
@@ -6,7 +7,7 @@ export function Users() {
 
     return (
         <section>
-            <h1>Users {params.userId}</h1>
+            <Title title={`Users ${params.userId}`} className='text-white'/>
         </section>
     )
 }
