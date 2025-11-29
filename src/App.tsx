@@ -1,41 +1,29 @@
-import {NavLink, type NavLinkRenderProps, Route, Routes, useParams} from "react-router";
-import {clsx} from "clsx";
+import {Route, Routes, useParams} from "react-router";
+import Header from "./ui/layouts/Header.tsx";
+import Footer from "./ui/layouts/Footer.tsx";
 
 export function App() {
-    const classNameLink = ({isActive}: NavLinkRenderProps) => {
-        return clsx(
-            'transition-colors font-bold',
-            {
-                'text-amber-500 cursor-default': isActive,
-                'hover:text-amber-300': !isActive
-            }
-        );
-    };
-
     return (
         <>
-            <nav className='flex items-center gap-3 p-3'>
-                <NavLink className={classNameLink} to={'/'}>Home</NavLink>
-                <NavLink className={classNameLink} to={'/users/29'}>User 29</NavLink>
-                <NavLink className={classNameLink} to={'/users/liu'}>Use Liu</NavLink>
-            </nav>
-            <main className={'p-3 prose'}>
+            <Header/>
+            <main className="container flex flex-col flex-1 gap-3 py-5">
                 <Routes>
                     <Route path={'/'} element={<Home/>}/>
                     <Route path={'/users/:userId'} element={<Users/>}/>
                 </Routes>
             </main>
+            <Footer/>
         </>
     )
 }
 
 function Home() {
-    return <h1>Home</h1>
+    return <section><h1>Home</h1></section>
 }
 
 function Users() {
 
     const params = useParams<{ userId: string }>();
 
-    return <h1>Users {params.userId}</h1>
+    return <section><h1>Users {params.userId}</h1></section>
 }
