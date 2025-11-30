@@ -1,14 +1,22 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useEffectEvent, useState} from 'react';
 import {createConnection, sendMessage} from './chat.ts';
+import {showNotification} from './notifications.ts';
 import {clsx} from "clsx";
 
-const serverUrl = 'https://localhost:1234';
+const serverUrl = 'https://localhost:5173';
 
-function ChatRoom({roomId}: { roomId: string }) {
+function ChatRoom({roomId, theme}: { roomId: string, theme: string }) {
     const [message, setMessage] = useState('');
+
+    const onConnected = useEffectEvent(() => {
+        showNotification('Connected!', theme);
+    });
 
     useEffect(() => {
         const connection = createConnection(serverUrl, roomId);
+        connection.on('connected', () => {
+            onConnected();
+        });
         connection.connect();
         return () => connection.disconnect();
     }, [roomId]);
@@ -25,7 +33,8 @@ function ChatRoom({roomId}: { roomId: string }) {
                 value={message} onChange={e => setMessage(e.target.value)}/>
             <button
                 className='flex items-center justify-center p-2 border rounded-md cursor-pointer text-center text-bold text-orange-300 hover:text-orange-400 transition-colors'
-                onClick={handleSendClick}>Send</button>
+                onClick={handleSendClick}>Send
+            </button>
         </>
     );
 }
@@ -33,6 +42,7 @@ function ChatRoom({roomId}: { roomId: string }) {
 export function AppChat() {
     const [roomId, setRoomId] = useState('general');
     const [show, setShow] = useState(false);
+    const [isDark, setIsDark] = useState(false);
 
     const classNameButtonRoom = clsx(
         'flex items-center p-2 border rounded-md cursor-pointer text-center',
@@ -58,6 +68,14 @@ export function AppChat() {
                         <option value="music">music</option>
                     </select>
                 </label>
+                <label className='flex items-center gap-2'>
+                    <input
+                        type="checkbox"
+                        checked={isDark}
+                        onChange={e => setIsDark(e.target.checked)}
+                    />
+                    Use dark theme
+                </label>
                 <button
                     className={classNameButtonRoom}
                     onClick={() => setShow(!show)}>
@@ -66,7 +84,10 @@ export function AppChat() {
 
             </div>
             {show && <hr/>}
-            {show && <ChatRoom roomId={roomId}/>}
+            {show && <ChatRoom
+                roomId={roomId}
+                theme={isDark ? 'dark' : 'light'}
+            />}
         </div>
     );
 }
