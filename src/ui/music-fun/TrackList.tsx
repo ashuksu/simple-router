@@ -1,5 +1,5 @@
-import {TrackItem} from "./TrackItem";
-import {useTracks} from "../bll/useTracks";
+import {TrackItem} from "./TrackItem.tsx";
+import {useTracks} from "../../bll/music-fun/useTracks.tsx";
 import {clsx} from "clsx";
 
 interface Props {

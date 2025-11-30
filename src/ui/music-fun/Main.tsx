@@ -1,4 +1,4 @@
-import TrackList from "../TrackList";
+import TrackList from "./TrackList.tsx";
 import {Title} from "../elements/Title.tsx";
 
 interface MainProps {
@@ -6,7 +6,7 @@ interface MainProps {
     onTrackSelect: (id: string | null) => void;
 }
 
-export default function Main({trackId, onTrackSelect}: MainProps) {
+export function Main({trackId, onTrackSelect}: MainProps) {
     return (
         <section className="section w-1/2">
             <Title title='Track List' className='mb-5'/>

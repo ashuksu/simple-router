@@ -1,7 +1,7 @@
-import TrackDetails from "../TrackDetails";
+import TrackDetails from "./TrackDetails.tsx";
 import {Title} from "../elements/Title.tsx";
 
-export default function SidebarMenu({trackId}: { trackId: string | null }) {
+export function SidebarMenu({trackId}: { trackId: string | null }) {
     return (
         <aside className="sidebar-menu w-1/2">
             <Title title='Track Details' className='mb-5'/>
