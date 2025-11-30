@@ -4,8 +4,8 @@ export function sendMessage(message: string) {
 
 export function createConnection(serverUrl: string, roomId: string) {
     // A real implementation would actually connect to the server
-    let connectedCallback;
-    let timeout;
+    let connectedCallback: (() => void) | undefined;
+    let timeout: NodeJS.Timeout | undefined;
     return {
         connect() {
             timeout = setTimeout(() => {
@@ -15,7 +15,7 @@ export function createConnection(serverUrl: string, roomId: string) {
                 }
             }, 100);
         },
-        on(event, callback) {
+        on(event: string, callback: () => void) {
             if (connectedCallback) {
                 throw Error('Cannot add the handler twice.');
             }
