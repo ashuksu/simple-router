@@ -1,43 +1,6 @@
-import {useEffect, useEffectEvent, useState} from 'react';
-import {createConnection, sendMessage} from './chat.ts';
-import {showNotification} from './notifications.ts';
+import {useState} from 'react';
 import {clsx} from "clsx";
-
-const serverUrl = 'https://localhost:5173';
-
-function ChatRoom({roomId, theme}: { roomId: string, theme: string }) {
-    const [message, setMessage] = useState('');
-
-    const onConnected = useEffectEvent(() => {
-        showNotification('Connected!', theme);
-    });
-
-    useEffect(() => {
-        const connection = createConnection(serverUrl, roomId);
-        connection.on('connected', () => {
-            onConnected();
-        });
-        connection.connect();
-        return () => connection.disconnect();
-    }, [roomId]);
-
-    function handleSendClick() {
-        sendMessage(message);
-    }
-
-    return (
-        <>
-            <h3>Welcome to the {roomId} room!</h3>
-            <input
-                className='flex items-center p-2 border rounded-md'
-                value={message} onChange={e => setMessage(e.target.value)}/>
-            <button
-                className='flex items-center justify-center p-2 border rounded-md cursor-pointer text-center text-bold text-orange-300 hover:text-orange-400 transition-colors'
-                onClick={handleSendClick}>Send
-            </button>
-        </>
-    );
-}
+import {ChatRoom} from "./ChatRoom.tsx";
 
 export function AppChat() {
     const [roomId, setRoomId] = useState('general');
@@ -86,6 +49,7 @@ export function AppChat() {
             {show && <hr/>}
             {show && <ChatRoom
                 roomId={roomId}
+                isDark={isDark}
                 theme={isDark ? 'dark' : 'light'}
             />}
         </div>
