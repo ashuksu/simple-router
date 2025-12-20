@@ -39,11 +39,15 @@ jobs:
       - name: ESLinter
         run: pnpm run lint
 
+      - name: Resolve BASE path
+        id: base
+        run: echo "path=/${GITHUB_REPOSITORY#*/}/" >> "$GITHUB_OUTPUT"
+
       - name: Build Project
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
-          BASE_PATH: "/${{ github.event.repository.name }}/"
+          BASE_PATH: ${{ steps.base.outputs.path }}
         run: pnpm run build
 
       - name: Setup Pages
