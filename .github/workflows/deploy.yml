@@ -43,7 +43,7 @@ jobs:
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
-          BASE_PATH: "/simple-router/"
+          BASE_PATH: "/${{ github.event.repository.name }}/"
         run: pnpm run build
 
       - name: Setup Pages
