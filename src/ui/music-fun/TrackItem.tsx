@@ -26,6 +26,10 @@ export function TrackItem({index, track, isSelected, onSelect}: Props) {
             <p className='break-all text-left'>
                 {track.attributes.title}
             </p>
+            <audio
+                controls
+                src={track.attributes.attachments[0].url}
+            />
         </div>
     )
 }
