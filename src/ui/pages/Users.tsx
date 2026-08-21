@@ -2,7 +2,6 @@ import {useParams} from "react-router";
 import {Title} from "../elements/Title.tsx";
 
 export function Users() {
-
     const params = useParams<{ userId: string }>();
 
     return (

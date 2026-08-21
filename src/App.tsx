@@ -4,6 +4,7 @@ import {Footer} from "./ui/layouts/Footer.tsx";
 import {HomePage} from "./ui/pages/HomePage.tsx";
 import {GamePage} from "./ui/pages/GamePage.tsx";
 import {Users} from "./ui/pages/Users.tsx";
+import {MusicFunPage} from "./ui/pages/MusicFunPage.tsx";
 
 export function App() {
     return (
@@ -12,6 +13,7 @@ export function App() {
             <main className="flex flex-col flex-1 gap-3 py-5">
                 <Routes>
                     <Route path={'/'} element={<HomePage/>}/>
+                    <Route path={'/music-fun'} element={<MusicFunPage/>}/>
                     <Route path={'/game'} element={<GamePage/>}/>
                     <Route path={'/users/:userId'} element={<Users/>}/>
                 </Routes>
