@@ -2,7 +2,7 @@ name: Deploy static content (Simple Router) to GitHub Pages
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "test" ]
   workflow_dispatch:
 
 permissions:
