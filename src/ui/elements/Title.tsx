@@ -14,4 +14,4 @@ export function Title({title, className}: TitleProps) {
             {title}
         </h2>
     )
-};
+}

@@ -1,7 +1,9 @@
+import {AppChat} from "../chat/AppChat.tsx";
+
 export function HomePageContent() {
     return (
         <div className="container">
-            <p>Home Page Content</p>
+            <AppChat/>
         </div>
     )
 }

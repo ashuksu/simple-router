@@ -16,6 +16,7 @@ export function Header() {
         <header className='header shrink-0 bg-gray-800'>
             <nav className='container flex items-center justify-center gap-3 py-3 text-white'>
                 <NavLink className={classNameLink} to={'/'}>Home</NavLink>
+                <NavLink className={classNameLink} to={'/music-fun'}>Music Fun</NavLink>
                 <NavLink className={classNameLink} to={'/game'}>Game</NavLink>
                 <NavLink className={classNameLink} to={'/users/29'}>User 29</NavLink>
                 <NavLink className={classNameLink} to={'/users/liu'}>Use Liu</NavLink>
