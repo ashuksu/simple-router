@@ -34,10 +34,11 @@ export type GetTrackDetailsOutput = { data: TrackDetailsResource }
 export type GetTrackListOutput = { data: Track[] }
 
 const PAGE_SIZE = (value?: number) => value ? `?pageSize=${value}` : '';
-const TRACKS_URL = `${API_URL}/playlists/tracks${PAGE_SIZE(5)}`; // 5 tracks per page
+const TRACKS_URL = `${API_URL}/playlists/tracks`;
+const LIMITED_TRACKS_URL: string = TRACKS_URL + PAGE_SIZE(5); // 5 tracks per page
 
 export function getTracks(): Promise<GetTrackListOutput> {
-    return fetch(TRACKS_URL, {
+    return fetch(LIMITED_TRACKS_URL, {
         headers: {
             'api-key': API_KEY
         }

@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router";
+import {Navigate, Route, Routes} from "react-router";
 import {Header} from "./ui/layouts/Header.tsx";
 import {Footer} from "./ui/layouts/Footer.tsx";
 import {HomePage} from "./ui/pages/HomePage.tsx";
@@ -17,7 +17,8 @@ export function App() {
                     <Route path={'/music-fun'} element={<MusicFunPage/>}/>
                     <Route path={'/game'} element={<GamePage/>}/>
                     <Route path={'/users/:userId'} element={<Users/>}/>
-                    <Route path={'*'} element={<NotFoundPage/>}/>
+                    <Route path={'/404'} element={<NotFoundPage/>}/>
+                    <Route path={'*'} element={<Navigate to="/404" replace/>}/>
                 </Routes>
             </main>
             <Footer/>
