@@ -5,6 +5,7 @@ import {HomePage} from "./ui/pages/HomePage.tsx";
 import {GamePage} from "./ui/pages/GamePage.tsx";
 import {Users} from "./ui/pages/Users.tsx";
 import {MusicFunPage} from "./ui/pages/MusicFunPage.tsx";
+import {NotFoundPage} from "./ui/pages/NotFoundPage.tsx";
 
 export function App() {
     return (
@@ -16,6 +17,7 @@ export function App() {
                     <Route path={'/music-fun'} element={<MusicFunPage/>}/>
                     <Route path={'/game'} element={<GamePage/>}/>
                     <Route path={'/users/:userId'} element={<Users/>}/>
+                    <Route path={'*'} element={<NotFoundPage/>}/>
                 </Routes>
             </main>
             <Footer/>
