@@ -33,29 +33,22 @@ export type TrackDetailsResource = {
 export type GetTrackDetailsOutput = { data: TrackDetailsResource }
 export type GetTrackListOutput = { data: Track[] }
 
-const PAGE_SIZE = (value?: number) => value ? `?pageSize=${value}` : '';
+const PAGE_SIZE = (value?: number) => value !== undefined ? `?pageSize=${value}` : '';
 const TRACKS_URL = `${API_URL}/playlists/tracks`;
-const LIMITED_TRACKS_URL: string = TRACKS_URL + PAGE_SIZE(5); // 5 tracks per page
+const LIMITED_TRACKS_URL = `${TRACKS_URL}${PAGE_SIZE(5)}`; // 5 tracks per page
+const headers: HeadersInit = API_KEY ? {'api-key': API_KEY} : {};
+export async function getTracks(): Promise<GetTrackListOutput> {
+    const res = await fetch(LIMITED_TRACKS_URL, {headers});
 
-export function getTracks(): Promise<GetTrackListOutput> {
-    return fetch(LIMITED_TRACKS_URL, {
-        headers: {
-            'api-key': API_KEY
-        }
-    }).then(res => {
-        if (!res.ok) throw new Error(`HTTP error! status (Track List): ${res.status}`);
-        return res.json();
-    })
+    if (!res.ok) throw new Error(`HTTP error! status (Track List): ${res.status}`);
+
+    return res.json();
 }
 
+export async function getTrack(trackId: string): Promise<GetTrackDetailsOutput> {
+    const res = await fetch(`${TRACKS_URL}/${trackId}`, {headers});
 
-export function getTrack(trackId: string): Promise<GetTrackDetailsOutput> {
-    return fetch(TRACKS_URL + '/' + trackId, {
-        headers: {
-            'api-key': API_KEY
-        }
-    }).then(res => {
-        if (!res.ok) throw new Error(`HTTP error! status (Track Detail): ${res.status}`);
-        return res.json();
-    });
+    if (!res.ok) throw new Error(`HTTP error! status (Track Detail): ${res.status}`);
+
+    return res.json();
 }
